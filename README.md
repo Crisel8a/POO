@@ -1,0 +1,2 @@
+uv -- version
+uv init
