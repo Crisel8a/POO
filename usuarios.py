@@ -1,3 +1,8 @@
+def SolicitanteProtocol(Protocol):
+    def solicitar_libro(self, titulo: str) -> str:
+        """Meotodo que debe implementar cualquier clase que desee ser un Solicitante de libros."""
+
+
 class Usuario:
     def __init__(self, nombre, cedula):
         self.nombre = nombre
@@ -23,6 +28,13 @@ class Estudiante(Usuario):
         else:
             return "Límite de préstamos alcanzado. No se puede solicitar más libros."
 
+    def devolver_libro(self, titulo):
+        if titulo in self.libros_prestados:
+            self.libros_prestados.remove(titulo)
+            return f"Libro {titulo} devuelto."
+        else:
+            return f"No se puede devolver {titulo}. No está en la lista de libros prestados."
+
 
 class Profesor(Usuario):
     def __init__(self, nombre, cedula):
@@ -33,11 +45,12 @@ class Profesor(Usuario):
         return f"Solicitud de libro: {titulo}, realizada"
 
 
-estudiante = Estudiante("Alice", "123456789", "Ingeniería")
-profesor = Profesor("Bob", "987654321")
+estudiante_1 = Estudiante("Juan Pérez", "123456789", "Ingeniería de Sistemas")
+estudiante_2 = Estudiante("María Gómez", "987654321", "Medicina")
+estudiante_3 = Estudiante("Carlos López", "456789123", "Derecho")
+profesor_1 = Profesor("Dr. Ana Torres", "111222333")
 
-print(estudiante.solicitar_libro("Cien Años de Soledad"))
-print(estudiante.solicitar_libro("Don Quijote de la Mancha"))
-print(estudiante.solicitar_libro("Harry Potter y la Piedra Filosofal"))
-print(estudiante.solicitar_libro("El Principito"))  # Debería indicar
-print(profesor.solicitar_libro("El Quijote"))
+usuarios = [estudiante_1, estudiante_2, estudiante_3, profesor_1]
+
+for usuario in usuarios:
+    print(usuario.solicitar_libro("Cien Años de Soledad"))
